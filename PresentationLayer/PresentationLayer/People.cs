@@ -1,14 +1,35 @@
 using BusinessLayer;
 using System.Data;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PresentationLayer
 {
     public partial class People : Form
     {
+        private DataTable _dt = clsPeople.GetPeopleData();
+
         public People()
         {
             InitializeComponent();
+        }
+
+        private Dictionary <string, string> GetColumnMapping()
+        {
+
+            return new Dictionary<string, string>()
+            {
+                { "National No", "NationalNo" },
+                { "First Name", "FirstName" },
+                { "Second Name", "SecondName" },
+                { "Third Name", "ThirdName" },
+                { "Last Name", "LastName" },
+                { "Date Of Birth", "DateOfBirth" },
+                { "Gender", "Gender" },
+                { "Address", "Address" },
+                { "Phone", "Phone" },
+                { "Email", "Email" },
+                { "Country Name", "CountryName" },
+                { "Image Path", "ImagePath" }
+            };
         }
 
         private void People_Load(object sender, EventArgs e)
@@ -27,16 +48,23 @@ namespace PresentationLayer
             lvPeople.Columns.Add("Address", 200);
             lvPeople.Columns.Add("Phone", 100);
             lvPeople.Columns.Add("Email", 150);
-            lvPeople.Columns.Add("Nationality Country ID", 80);
-            lvPeople.Columns.Add("Image Path", 150);
+            lvPeople.Columns.Add("Country Name", 120);
+            lvPeople.Columns.Add("Image Path", 110);
 
-            LoadPeopleData();
+            Dictionary<string, string> ColumnMapping = GetColumnMapping();
+
+            cbFilterBy.Items.Insert(0, "Select A Filter...");
+            cbFilterBy.SelectedIndex = 0;
+            foreach(var item in ColumnMapping)
+            {
+                cbFilterBy.Items.Add(item.Key);
+            }
+
+            LoadPeopleData(_dt);
         }
 
-        private void LoadPeopleData()
+        private void LoadPeopleData(DataTable dt)
         {
-            DataTable dt = clsPeople.GetPeopleData();
-
             lvPeople.Items.Clear();
 
             foreach (DataRow row in dt.Rows)
@@ -47,7 +75,7 @@ namespace PresentationLayer
                 item.SubItems.Add(row["SecondName"].ToString());
                 item.SubItems.Add(row["ThirdName"].ToString());
                 item.SubItems.Add(row["LastName"].ToString());
-                item.SubItems.Add(row["DateOfBirth"].ToString());
+                item.SubItems.Add(Convert.ToDateTime(row["DateOfBirth"]).ToString("MM/dd/yyyy"));
                 item.SubItems.Add(row["Gender"].ToString());
                 item.SubItems.Add(row["Address"].ToString());
                 item.SubItems.Add(row["Phone"].ToString());
@@ -64,6 +92,24 @@ namespace PresentationLayer
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbFilterBy.SelectedIndex == 0|| cbFilterBy.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            Dictionary<string, string> ColumnMapping = GetColumnMapping();
+
+            string DisplayName = (string)cbFilterBy.SelectedItem!;
+            string dbColumnName = ColumnMapping[DisplayName];
+
+            DataView dv = _dt.DefaultView;
+            dv.Sort = dbColumnName + " ASC";
+
+            LoadPeopleData(dv.ToTable());
         }
     }
 }
