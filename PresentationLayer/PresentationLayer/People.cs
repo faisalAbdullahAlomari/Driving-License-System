@@ -39,7 +39,7 @@ namespace PresentationLayer
 
             lvPeople.Items.Clear();
 
-            foreach(DataRow row in dt.Rows)
+            foreach (DataRow row in dt.Rows)
             {
 
                 ListViewItem item = new ListViewItem(row["NationalNo"].ToString());
@@ -59,6 +59,11 @@ namespace PresentationLayer
             }
 
             lblCountRecords.Text = $"# Records: {lvPeople.Items.Count}";
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
