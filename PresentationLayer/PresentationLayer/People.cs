@@ -96,7 +96,7 @@ namespace PresentationLayer
 
         private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbFilterBy.SelectedIndex == 0|| cbFilterBy.SelectedIndex == -1)
+            if (cbFilterBy.SelectedIndex == 0)
             {
                 return;
             }
