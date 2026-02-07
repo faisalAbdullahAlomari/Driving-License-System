@@ -13,3 +13,4 @@ C:\Users\Faisal\Desktop\Driving-License-Management-System\BusinessLayer\bin\Debu
 C:\Users\Faisal\Desktop\Driving-License-Management-System\BusinessLayer\bin\Debug\net10.0\DataAccessLayer.pdb
 C:\Users\Faisal\Desktop\Driving-License-Management-System\BusinessLayer\obj\Debug\net10.0\BusinessLayer.csproj.AssemblyReference.cache
 C:\Users\Faisal\Desktop\Driving-License-Management-System\BusinessLayer\obj\Debug\net10.0\Business.EA331CBA.Up2Date
+C:\Users\Faisal\Desktop\Driving-License-Management-System\BusinessLayer\obj\Debug\net10.0\BusinessLayer.sourcelink.json

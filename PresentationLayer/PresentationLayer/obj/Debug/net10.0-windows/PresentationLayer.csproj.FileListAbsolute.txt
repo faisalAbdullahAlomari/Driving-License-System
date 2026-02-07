@@ -69,3 +69,6 @@ C:\Users\Faisal\Desktop\Driving-License-Management-System\PresentationLayer\Pres
 C:\Users\Faisal\Desktop\Driving-License-Management-System\PresentationLayer\PresentationLayer\bin\Debug\net10.0-windows\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\Faisal\Desktop\Driving-License-Management-System\PresentationLayer\PresentationLayer\bin\Debug\net10.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\Faisal\Desktop\Driving-License-Management-System\PresentationLayer\PresentationLayer\bin\Debug\net10.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Faisal\Desktop\Driving-License-Management-System\PresentationLayer\PresentationLayer\obj\Debug\net10.0-windows\PresentationLayer.sourcelink.json
+C:\Users\Faisal\Desktop\Driving-License-Management-System\PresentationLayer\PresentationLayer\obj\Debug\net10.0-windows\PresentationLayer.AddNewAndUpdatePerson.resources
+C:\Users\Faisal\Desktop\Driving-License-Management-System\PresentationLayer\PresentationLayer\obj\Debug\net10.0-windows\PresentationLayer.ctrlAddAndUpdatePerson.resources

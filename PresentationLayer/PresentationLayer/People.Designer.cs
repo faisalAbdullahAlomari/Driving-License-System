@@ -56,6 +56,7 @@
             btnClose.TabIndex = 1;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // btnAddNewPerson
             // 
@@ -68,6 +69,7 @@
             btnAddNewPerson.Size = new Size(46, 48);
             btnAddNewPerson.TabIndex = 2;
             btnAddNewPerson.UseVisualStyleBackColor = true;
+            btnAddNewPerson.Click += btnAddNewPerson_Click;
             // 
             // label1
             // 
@@ -86,6 +88,7 @@
             cbFilterBy.Name = "cbFilterBy";
             cbFilterBy.Size = new Size(150, 23);
             cbFilterBy.TabIndex = 4;
+            cbFilterBy.SelectedIndexChanged += cbFilterBy_SelectedIndexChanged;
             // 
             // lblCountRecords
             // 
