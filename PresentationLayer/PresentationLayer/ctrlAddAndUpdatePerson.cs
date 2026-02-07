@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+namespace PresentationLayer
+{
+    public partial class ctrlAddAndUpdatePerson : UserControl
+    {
+        public ctrlAddAndUpdatePerson()
+        {
+            InitializeComponent();
+
+            dtDateOfBirth.MaxDate = dtDateOfBirth.MaxDate.AddYears(-18);
+        }
+    }
+}

@@ -12,7 +12,7 @@ namespace PresentationLayer
             InitializeComponent();
         }
 
-        private Dictionary <string, string> GetColumnMapping()
+        private Dictionary<string, string> GetColumnMapping()
         {
 
             return new Dictionary<string, string>()
@@ -55,7 +55,7 @@ namespace PresentationLayer
 
             cbFilterBy.Items.Insert(0, "Select A Filter...");
             cbFilterBy.SelectedIndex = 0;
-            foreach(var item in ColumnMapping)
+            foreach (var item in ColumnMapping)
             {
                 cbFilterBy.Items.Add(item.Key);
             }
@@ -110,6 +110,11 @@ namespace PresentationLayer
             dv.Sort = dbColumnName + " ASC";
 
             LoadPeopleData(dv.ToTable());
+        }
+
+        private void btnAddNewPerson_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
