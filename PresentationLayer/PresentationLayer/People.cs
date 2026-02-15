@@ -114,7 +114,9 @@ namespace PresentationLayer
 
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
+            AddNewAndUpdatePerson AddAndUpdate = new AddNewAndUpdatePerson();
 
+            AddAndUpdate.ShowDialog();
         }
     }
 }
