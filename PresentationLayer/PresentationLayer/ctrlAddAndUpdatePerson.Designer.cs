@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlAddAndUpdatePerson));
             txtFirstName = new TextBox();
             label1 = new Label();
@@ -55,7 +56,9 @@
             rbFemale = new RadioButton();
             dtDateOfBirth = new DateTimePicker();
             cbCountries = new ComboBox();
+            errorProvider1 = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // txtFirstName
@@ -168,6 +171,7 @@
             txtNationalNumber.Name = "txtNationalNumber";
             txtNationalNumber.Size = new Size(160, 23);
             txtNationalNumber.TabIndex = 5;
+            txtNationalNumber.Validating += txtNationalNumber_Validating;
             // 
             // label7
             // 
@@ -197,6 +201,7 @@
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(160, 23);
             txtEmail.TabIndex = 10;
+            txtEmail.Validating += txtEmail_Validating;
             // 
             // label9
             // 
@@ -306,7 +311,11 @@
             cbCountries.Location = new Point(502, 202);
             cbCountries.Name = "cbCountries";
             cbCountries.Size = new Size(160, 23);
-            cbCountries.TabIndex = 1;
+            cbCountries.TabIndex = 11;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
             // 
             // ctrlAddAndUpdatePerson
             // 
@@ -341,6 +350,7 @@
             Name = "ctrlAddAndUpdatePerson";
             Size = new Size(842, 405);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -373,5 +383,6 @@
         private RadioButton rbFemale;
         private DateTimePicker dtDateOfBirth;
         private ComboBox cbCountries;
+        private ErrorProvider errorProvider1;
     }
 }

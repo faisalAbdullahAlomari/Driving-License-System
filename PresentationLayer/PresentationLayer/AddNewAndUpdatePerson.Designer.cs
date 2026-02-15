@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             ctrlAddAndUpdatePerson1 = new ctrlAddAndUpdatePerson();
+            btnClose = new Button();
+            btnSave = new Button();
             SuspendLayout();
             // 
             // ctrlAddAndUpdatePerson1
@@ -39,11 +41,32 @@
             ctrlAddAndUpdatePerson1.Size = new Size(842, 405);
             ctrlAddAndUpdatePerson1.TabIndex = 0;
             // 
+            // btnClose
+            // 
+            btnClose.Location = new Point(524, 453);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(75, 33);
+            btnClose.TabIndex = 1;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(605, 453);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(75, 33);
+            btnSave.TabIndex = 2;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            // 
             // AddNewAndUpdatePerson
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(874, 507);
+            Controls.Add(btnSave);
+            Controls.Add(btnClose);
             Controls.Add(ctrlAddAndUpdatePerson1);
             MaximumSize = new Size(890, 546);
             MinimumSize = new Size(890, 546);
@@ -55,5 +78,7 @@
         #endregion
 
         private ctrlAddAndUpdatePerson ctrlAddAndUpdatePerson1;
+        private Button btnClose;
+        private Button btnSave;
     }
 }
