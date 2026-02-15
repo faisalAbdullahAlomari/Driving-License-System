@@ -91,5 +91,40 @@ namespace DataAccessLayer
 
             return IsExists;
         }
+
+        public static DataTable LoadAllCountries()
+        {
+            string query = @"SELECT CountryID, CountryName 
+                             FROM Countries;";
+
+            DataTable dt = new DataTable();
+
+            using(SqlConnection conn = new SqlConnection(_ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+
+                    try
+                    {
+                        conn.Open();
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+
+                            if (reader.HasRows)
+                            {
+                                dt.Load(reader);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+            }
+
+            return dt;
+        }
     }
 }

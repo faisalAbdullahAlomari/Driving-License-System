@@ -18,5 +18,10 @@ namespace BusinessLayer
         {
             return clsPeopleData.NationalNumberExists(NationalNumber);
         }
+
+        public static DataTable LoadCountries()
+        {
+            return clsPeopleData.LoadAllCountries();
+        }
     }
 }
