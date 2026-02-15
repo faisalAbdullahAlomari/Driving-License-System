@@ -19,5 +19,13 @@ namespace PresentationLayer
         {
             this.Close();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (!ctrlAddAndUpdatePerson1.ValidateAll())
+            {
+                MessageBox.Show("Please correct the errors before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

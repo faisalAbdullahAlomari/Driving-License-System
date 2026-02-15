@@ -21,7 +21,39 @@ namespace PresentationLayer
             dtDateOfBirth.MaxDate = DateTime.Today.AddYears(-18);
             dtDateOfBirth.MinDate = DateTime.Today.AddYears(-100);
 
+            LoadCountries();
+
             dtDateOfBirth.Value = dtDateOfBirth.MaxDate;
+            DefaultPersonPicture();
+        }
+
+        private void LoadCountries()
+        {
+            DataTable dtCountries = clsPeople.LoadCountries();
+
+            cbCountries.Items.Clear();
+
+            DataRow row = dtCountries.NewRow();
+            row["CountryID"] = -1;
+            row["CountryName"] = "Select Country";
+            dtCountries.Rows.InsertAt(row, 0);
+
+            cbCountries.DataSource = dtCountries;
+            cbCountries.DisplayMember = "CountryName";
+            cbCountries.ValueMember = "CountryID";
+            cbCountries.SelectedIndex = 0;
+        }
+
+        private void DefaultPersonPicture()
+        {
+            if (rbMale.Checked)
+            {
+                pbPersonPicture.Image = Properties.Resources.user_male;
+            }
+            else
+            {
+                pbPersonPicture.Image = Properties.Resources.user_female;
+            }
         }
 
         private void txtNationalNumber_Validating(object sender, CancelEventArgs e)
@@ -54,7 +86,8 @@ namespace PresentationLayer
 
                 return addr.Address == Email && Regex.IsMatch(Email, pattern);
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return false;
             }
@@ -73,6 +106,63 @@ namespace PresentationLayer
                 errorProvider1.SetError(txtEmail, "");
                 e.Cancel = false;
             }
+        }
+
+        public bool ValidateAll()
+        {
+
+            errorProvider1.Clear();
+
+            if (string.IsNullOrWhiteSpace(txtFirstName.Text))
+            {
+                errorProvider1.SetError(txtFirstName, "First Name Is Required");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtSecondName.Text))
+            {
+                errorProvider1.SetError(txtSecondName, "Second Name Is Required");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtLastName.Text))
+            {
+                errorProvider1.SetError(txtLastName, "Last Name Is Required");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtNationalNumber.Text))
+            {
+                errorProvider1.SetError(txtNationalNumber, "National Number Is Required");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPhone.Text))
+            {
+                errorProvider1.SetError(txtPhone, "Phone Number Is Required");
+                return false;
+            }
+
+            if (cbCountries.SelectedIndex == 0)
+            {
+                errorProvider1.SetError(cbCountries, "Country Is Required");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtAddress.Text))
+            {
+                errorProvider1.SetError(txtAddress, "Address Is Required");
+                return false;
+            }
+
+            errorProvider1.Clear();
+
+            return true;
+        }
+
+        private void rbMale_CheckedChanged(object sender, EventArgs e)
+        {
+            DefaultPersonPicture();
         }
     }
 }

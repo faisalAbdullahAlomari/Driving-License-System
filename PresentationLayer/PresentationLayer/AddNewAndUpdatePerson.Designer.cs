@@ -59,6 +59,7 @@
             btnSave.TabIndex = 2;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // AddNewAndUpdatePerson
             // 

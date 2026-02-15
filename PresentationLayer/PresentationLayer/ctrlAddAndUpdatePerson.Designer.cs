@@ -39,7 +39,7 @@
             txtThirdName = new TextBox();
             label6 = new Label();
             txtLastName = new TextBox();
-            pictureBox1 = new PictureBox();
+            pbPersonPicture = new PictureBox();
             label2 = new Label();
             txtNationalNumber = new TextBox();
             label7 = new Label();
@@ -57,7 +57,7 @@
             dtDateOfBirth = new DateTimePicker();
             cbCountries = new ComboBox();
             errorProvider1 = new ErrorProvider(components);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPersonPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
@@ -144,15 +144,16 @@
             txtLastName.Size = new Size(160, 23);
             txtLastName.TabIndex = 4;
             // 
-            // pictureBox1
+            // pbPersonPicture
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(668, 92);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(160, 155);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 10;
-            pictureBox1.TabStop = false;
+            pbPersonPicture.AccessibleRole = AccessibleRole.Clock;
+            pbPersonPicture.Image = (Image)resources.GetObject("pbPersonPicture.Image");
+            pbPersonPicture.Location = new Point(668, 92);
+            pbPersonPicture.Name = "pbPersonPicture";
+            pbPersonPicture.Size = new Size(160, 155);
+            pbPersonPicture.SizeMode = PictureBoxSizeMode.Zoom;
+            pbPersonPicture.TabIndex = 10;
+            pbPersonPicture.TabStop = false;
             // 
             // label2
             // 
@@ -286,6 +287,7 @@
             rbMale.TabStop = true;
             rbMale.Text = "Male";
             rbMale.UseVisualStyleBackColor = true;
+            rbMale.CheckedChanged += rbMale_CheckedChanged;
             // 
             // rbFemale
             // 
@@ -337,7 +339,7 @@
             Controls.Add(label7);
             Controls.Add(label2);
             Controls.Add(txtNationalNumber);
-            Controls.Add(pictureBox1);
+            Controls.Add(pbPersonPicture);
             Controls.Add(label6);
             Controls.Add(txtLastName);
             Controls.Add(label5);
@@ -349,7 +351,7 @@
             Controls.Add(txtFirstName);
             Name = "ctrlAddAndUpdatePerson";
             Size = new Size(842, 405);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPersonPicture).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -366,7 +368,7 @@
         private TextBox txtThirdName;
         private Label label6;
         private TextBox txtLastName;
-        private PictureBox pictureBox1;
+        private PictureBox pbPersonPicture;
         private Label label2;
         private TextBox txtNationalNumber;
         private Label label7;
