@@ -36,13 +36,13 @@ namespace DataAccessLayer
 
             using (SqlConnection conn = new SqlConnection(_ConnectionString))
             {
-                using(SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     try
                     {
                         conn.Open();
 
-                        using(SqlDataReader rdr = cmd.ExecuteReader())
+                        using (SqlDataReader rdr = cmd.ExecuteReader())
                         {
 
                             if (rdr.HasRows)
@@ -50,15 +50,46 @@ namespace DataAccessLayer
                                 dt.Load(rdr);
                             }
                         }
-                    }catch(Exception ex)
+                    } catch (Exception ex)
                     {
-                        File.AppendAllText("log.txt", ex.Message + "\n");
+                        File.AppendAllText("log.txt", "GetPeopleData() Exception: " + ex.Message + "\n");
                     }
 
                 }
             }
 
             return dt;
+        }
+
+        public static bool NationalNumberExists(string NationalNumber)
+        {
+            bool IsExists = false;
+
+            string query = @"SELECT IsFound = 1 
+                            FROM People 
+                            WHERE NationalNO = @NationalNumber";
+
+            using(SqlConnection conn = new SqlConnection(_ConnectionString))
+            {
+                using(SqlCommand cmd = new SqlCommand(query, conn))
+                {
+
+                    cmd.Parameters.Add("@NationalNumber", SqlDbType.NVarChar, 20).Value = NationalNumber;
+
+                    try
+                    {
+                        conn.Open();
+
+                        IsExists = (cmd.ExecuteScalar() != null);
+
+                    }catch(Exception ex)
+                    {
+                        File.AppendAllText("log.txt", "NationalNumberExists() Exception: " + ex.Message + "\n");
+                    }
+                }
+            }
+
+            return IsExists;
         }
     }
 }

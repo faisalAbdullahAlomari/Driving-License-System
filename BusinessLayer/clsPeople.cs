@@ -13,5 +13,10 @@ namespace BusinessLayer
 
             return dt;
         }
+
+        public static bool NationalNumberExists(string NationalNumber)
+        {
+            return clsPeopleData.NationalNumberExists(NationalNumber);
+        }
     }
 }
