@@ -8,11 +8,21 @@ namespace DataAccessLayer
     public class clsPeopleData
     {
 
-        private static string _ConnectionString = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build()
-            .GetConnectionString("DefaultConnection")!;
+        private static string GetConnectionString()
+        {
+            try
+            {
+                return new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: true)
+                    .Build()
+                    .GetConnectionString("DefaultConnection") ?? "";
+            }
+            catch
+            {
+                return "";
+            }
+        }
 
         public static DataTable GetPeopleData()
         {
@@ -34,7 +44,7 @@ namespace DataAccessLayer
                                     JOIN Countries c
                                         ON p.NationalityCountryID = c.CountryID";
 
-            using (SqlConnection conn = new SqlConnection(_ConnectionString))
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -69,7 +79,7 @@ namespace DataAccessLayer
                             FROM People 
                             WHERE NationalNO = @NationalNumber";
 
-            using(SqlConnection conn = new SqlConnection(_ConnectionString))
+            using(SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 using(SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -99,7 +109,7 @@ namespace DataAccessLayer
 
             DataTable dt = new DataTable();
 
-            using(SqlConnection conn = new SqlConnection(_ConnectionString))
+            using(SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -140,7 +150,7 @@ namespace DataAccessLayer
                                                  @Address, @Phone, @Email, @NationalityCountryID, @ImagePath);
                              SELECT SCOPE_IDENTITY();";
 
-            using(SqlConnection conn = new SqlConnection(_ConnectionString))
+            using(SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 using(SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -216,7 +226,7 @@ namespace DataAccessLayer
                                     ImagePath = @ImagePath
                             WHERE PersonID = @PersonID";
 
-            using(SqlConnection conn = new SqlConnection(_ConnectionString))
+            using(SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 using(SqlCommand cmd = new SqlCommand(query, conn))
                 {
