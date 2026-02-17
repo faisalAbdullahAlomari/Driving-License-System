@@ -18,13 +18,18 @@ namespace PresentationLayer
         {
             InitializeComponent();
 
+            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
+            {
+                return;
+            }
+
             dtDateOfBirth.MaxDate = DateTime.Today.AddYears(-18);
-            dtDateOfBirth.MinDate = DateTime.Today.AddYears(-100);
+                dtDateOfBirth.MinDate = DateTime.Today.AddYears(-100);
 
-            LoadCountries();
+                LoadCountries();
 
-            dtDateOfBirth.Value = dtDateOfBirth.MaxDate;
-            DefaultPersonPicture();
+                dtDateOfBirth.Value = dtDateOfBirth.MaxDate;
+                DefaultPersonPicture();
         }
 
         private void LoadCountries()

@@ -27,5 +27,10 @@ namespace PresentationLayer
                 MessageBox.Show("Please correct the errors before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void AddNewAndUpdatePerson_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
