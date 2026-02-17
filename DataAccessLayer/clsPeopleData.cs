@@ -119,12 +119,152 @@ namespace DataAccessLayer
                     }
                     catch (Exception ex)
                     {
-
+                        File.AppendAllText("log.txt", "LoadAllCountries() Exception: " + ex.Message + "\n");
                     }
                 }
             }
 
             return dt;
+        }
+
+        public static int AddNewPerson(string NationalNo, string FirstName, string SecondName, string ThirdName, string LastName, 
+                                       DateTime DateOfBirth, bool Gender, string Address, string Phone, string Email,
+                                       int NationalityCountryID, string ImagePath)
+        {
+
+            int PersonID = -1;
+
+            string query = @"INSERT INTO People (NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Gender,
+                                                 Address, Phone, Email, NationalityCountryID, ImagePath)
+                                                 Values(@NationalNo, @FirstName, @SecondName, @ThirdName, @LastName, @DateOfBirth, @Gender
+                                                 @Address, @Phone, @Email, @NationalityCountryID, @ImagePath);
+                             SELECT SCOPE_IDENTITY();";
+
+            using(SqlConnection conn = new SqlConnection(_ConnectionString))
+            {
+                using(SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.Add("@NationalNo", SqlDbType.NVarChar, 20).Value = NationalNo;
+                    cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar, 20).Value = FirstName;
+                    cmd.Parameters.Add("@SecondName", SqlDbType.NVarChar, 20).Value = SecondName;
+                    if (!string.IsNullOrWhiteSpace(ThirdName))
+                    {
+                        cmd.Parameters.Add("@ThirdName", SqlDbType.NVarChar, 20).Value = ThirdName;
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@ThirdName", SqlDbType.NVarChar).Value = DBNull.Value;
+                    }
+                    cmd.Parameters.Add("@LastName", SqlDbType.NVarChar, 20).Value = LastName;
+                    cmd.Parameters.Add("@DateOfBirth", SqlDbType.DateTime).Value = DateOfBirth;
+                    cmd.Parameters.Add("@Gender", SqlDbType.TinyInt).Value = Gender;
+                    cmd.Parameters.Add("@Address", SqlDbType.NVarChar, 500).Value = Address;
+                    cmd.Parameters.Add("@Phone", SqlDbType.NVarChar, 20).Value = Phone;
+                    cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 50).Value = Email;
+                    cmd.Parameters.Add("@NationalityCountryID", SqlDbType.Int).Value = NationalityCountryID;
+                    if (!string.IsNullOrWhiteSpace(ImagePath))
+                    {
+                        cmd.Parameters.Add("@ImagePath", SqlDbType.NVarChar, 250).Value = ImagePath;
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@ImagePath", SqlDbType.NVarChar).Value = DBNull.Value;
+                    }
+
+                    try
+                    {
+                        conn.Open();
+
+                        object scalar = cmd.ExecuteScalar();
+
+                        if(scalar != null && scalar != DBNull.Value)
+                        {
+                            PersonID = Convert.ToInt32(scalar);
+                        }
+
+                    }catch(Exception ex)
+                    {
+                        File.AppendAllText("log.txt", "AddNewPerson() Exception: " + ex.Message + "\n");
+                    }
+                }
+            }
+
+            return PersonID;
+        }
+
+        public static bool UpdatePersonInfo(int PersonID, string NationalNo, string FirstName, string SecondName, string ThirdName, string LastName,
+                                           DateTime DateOfBirth, bool Gender, string Address, string Phone, string Email,
+                                           int NationalityCountryID, string ImagePath)
+        {
+
+            int AffectedRows = 0;
+
+            bool UpdatedSuccessfully = false;
+
+            string query = @"UPDATE People 
+                                SET NationalNo = @NationalNo,
+                                    FirstName = @FirstName,
+                                    SecondName = @SecondName,
+                                    ThirdName = @ThirdName,
+                                    LastName = @LastName,
+                                    DateOfBirth = @DateOfBirth,
+                                    Gender = @Gender,
+                                    Address = @Address,
+                                    Phone = @Phone,
+                                    Email = @Email,
+                                    NationalityCountryID = @NationalityCountryID,
+                                    ImagePath = @ImagePath
+                            WHERE PersonID = @PersonID";
+
+            using(SqlConnection conn = new SqlConnection(_ConnectionString))
+            {
+                using(SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.Add("@NationalNo", SqlDbType.NVarChar, 20).Value = NationalNo;
+                    cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar, 20).Value = FirstName;
+                    cmd.Parameters.Add("@SecondName", SqlDbType.NVarChar, 20).Value = SecondName;
+                    if (!string.IsNullOrWhiteSpace(ThirdName))
+                    {
+                        cmd.Parameters.Add("@ThirdName", SqlDbType.NVarChar, 20).Value = ThirdName;
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@ThirdName", SqlDbType.NVarChar).Value = DBNull.Value;
+                    }
+                    cmd.Parameters.Add("@LastName", SqlDbType.NVarChar, 20).Value = LastName;
+                    cmd.Parameters.Add("@DateOfBirth", SqlDbType.DateTime).Value = DateOfBirth;
+                    cmd.Parameters.Add("@Gender", SqlDbType.TinyInt).Value = Gender;
+                    cmd.Parameters.Add("@Address", SqlDbType.NVarChar, 500).Value = Address;
+                    cmd.Parameters.Add("@Phone", SqlDbType.NVarChar, 20).Value = Phone;
+                    cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 50).Value = Email;
+                    cmd.Parameters.Add("@NationalityCountryID", SqlDbType.Int).Value = NationalityCountryID;
+                    if (!string.IsNullOrWhiteSpace(ImagePath))
+                    {
+                        cmd.Parameters.Add("@ImagePath", SqlDbType.NVarChar, 250).Value = ImagePath;
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@ImagePath", SqlDbType.NVarChar).Value = DBNull.Value;
+                    }
+
+                    try
+                    {
+                        conn.Open();
+
+                        AffectedRows = cmd.ExecuteNonQuery();
+
+                        if(AffectedRows != 0)
+                        {
+                            UpdatedSuccessfully = true;
+                        }
+                    }catch(Exception ex)
+                    {
+                        File.AppendAllText("log.txt", "UpdatePersonInfo() Exception: " + ex.Message + "\n");
+                    }
+                }
+            }
+
+            return UpdatedSuccessfully;
         }
     }
 }
